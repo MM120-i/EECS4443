@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="Round: "
+            android:text="@string/round"
             android:textSize="24sp" />
 
         <!-- High Score TextView -->
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="start"
-            android:text="High Score: "
+            android:text="@string/high_score"
             android:textSize="24sp" />
 
     </LinearLayout>
@@ -50,7 +50,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 1" />
+            android:text="@string/button_1" />
 
         <!-- Button 2 -->
         <Button
@@ -60,7 +60,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 2" />
+            android:text="@string/button_2" />
 
         <!-- Button 3 -->
         <Button
@@ -70,7 +70,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 3" />
+            android:text="@string/button_3" />
 
         <!-- Button 4 -->
         <Button
@@ -80,7 +80,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 4" />
+            android:text="@string/button_4" />
 
         <!-- Button 5 -->
         <Button
@@ -90,7 +90,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 5" />
+            android:text="@string/button_5" />
 
         <!-- Button 6 -->
         <Button
@@ -100,7 +100,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 6" />
+            android:text="@string/button_6" />
 
         <!-- Button 7 -->
         <Button
@@ -110,7 +110,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 7" />
+            android:text="@string/button_7" />
 
         <!-- Button 8 -->
         <Button
@@ -120,7 +120,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 8" />
+            android:text="@string/button_8" />
 
         <!-- Button 9 -->
         <Button
@@ -130,7 +130,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 9" />
+            android:text="@string/button_9" />
 
         <!-- Button 10 -->
         <Button
@@ -140,7 +140,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 10" />
+            android:text="@string/button_10" />
 
         <!-- Button 11 -->
         <Button
@@ -150,7 +150,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 11" />
+            android:text="@string/button_11" />
 
         <!-- Button 12 -->
         <Button
@@ -160,7 +160,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="Button 12" />
+            android:text="@string/button_12" />
 
     </GridLayout>
 
@@ -178,7 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginStart="0dp"
-            android:text="Start" />
+            android:text="@string/start" />
 
         <Button
             android:id="@+id/nextButton"
@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginStart="216dp"
-            android:text="Next" />
+            android:text="@string/next" />
 
     </LinearLayout>
 
