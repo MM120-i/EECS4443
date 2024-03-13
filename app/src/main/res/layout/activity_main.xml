@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginStart="216dp"
-            android:text="@string/next" />
+            android:text="@string/Next" />
 
     </LinearLayout>
 
