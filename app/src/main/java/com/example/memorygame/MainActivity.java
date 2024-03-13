@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i(MYDEBUG, "Start button clicked");
         }
         else if (id == R.id.nextButton) {
-            Log.i(MYDEBUG, "Next button clicked");
+            Log.i(MYDEBUG, "Next button clicked lfgg");
         }
     }
 
