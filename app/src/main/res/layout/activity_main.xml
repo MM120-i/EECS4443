@@ -50,7 +50,9 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="@string/button_1" />
+            android:text="@string/button_1"
+            android:textColorHighlight="#6750A3"
+            android:textColorLink="#6750A3" />
 
         <!-- Button 2 -->
         <Button
@@ -60,7 +62,8 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:text="@string/button_2" />
+            android:text="@string/button_2"
+            android:textColorLink="#614B99" />
 
         <!-- Button 3 -->
         <Button
