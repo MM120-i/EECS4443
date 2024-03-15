@@ -1,19 +1,31 @@
 package com.example.memorygame;
 
-import static com.example.memorygame.MainActivity.DURATION;
-import static com.example.memorygame.MainActivity.buttonIds;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.widget.Button;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+//Static imports
+import static com.example.memorygame.MainActivity.DURATION;
+import static com.example.memorygame.MainActivity.buttonIds;
+import static com.example.memorygame.MainActivity.round;
+
+
 public class Game implements ButtonClickListener {
     final static String MYDEBUG = "MYDEBUG";
     private final MainActivity activity;
     private final ToneGenerator toneGenerator;
+    private TextView roundTextView;
+    private boolean startButtonEnabled = true;
+    private final int MAX_ROUNDS = 5;   // This can be changed ofc. But for now we r keeping the max laps to 5.
 
     // Mapping of button IDs to tone types.
     private static final SparseIntArray buttonToToneMap = new SparseIntArray();
@@ -43,25 +55,46 @@ public class Game implements ButtonClickListener {
     }
 
     @Override
-    public void onNextButtonClick() {
-        Log.i(MYDEBUG, "Next button clicked.");
+    public void onEndGameButtonClick() {
+        Log.i(MYDEBUG, "End Game button clicked.");
     }
 
     @Override
     public void onStartButtonClick() {
         Log.i(MYDEBUG, "Start button clicked.");
-        playRandomPattern();
+
+        // Check if the Start button is enabled
+        if (startButtonEnabled && round < MAX_ROUNDS) {
+            startButtonEnabled = false;
+            playRandomPattern();
+            activity.getHandler().postDelayed(() -> startButtonEnabled = true, DURATION * 3); // Adjust the delay as needed
+        }
+        else if(round >= MAX_ROUNDS){
+            Intent intent = new Intent(activity, GameOverActivity.class);
+            intent.putExtra("round", round);
+            activity.startActivity(intent);
+        }
+    }
+
+    public void setRoundTextView(TextView textView){
+        this.roundTextView = textView;
     }
 
     private void playRandomPattern() {
 
+        if (round > MAX_ROUNDS) {
+            return;
+        }
+
         List<Integer> pattern = new ArrayList<>();
         Random random = new Random();
-        int NUMBER_OF_BEEPS = 3;            // For now we r testing with a random 3 sequence. This value will be changed later ofc.
+        round++;
+        // Calculate the number of beeps based on the current round
+        int numberOfBeeps = 3 + (round - 1);
         int delay = 0;
         int previousButtonId = -1;
 
-        for (int i = 0; i < NUMBER_OF_BEEPS; i++) {
+        for (int i = 0; i < numberOfBeeps; i++) {
 
             int randomIndex;
             int buttonId;
@@ -70,7 +103,8 @@ public class Game implements ButtonClickListener {
             do {
                 randomIndex = random.nextInt(buttonIds.length);
                 buttonId = buttonIds[randomIndex];
-            } while (buttonId == previousButtonId);
+            }
+            while (buttonId == previousButtonId);
 
             previousButtonId = buttonId;
 
@@ -78,6 +112,10 @@ public class Game implements ButtonClickListener {
             playToneAndChangeColor(buttonId, delay);
             delay += (DURATION + 90);
         }
+
+        // Update the round text view after determining the number of beeps
+        updateRoundTextView();
+
         Log.i(MYDEBUG, "Generated random pattern: " + pattern);
     }
 
@@ -86,23 +124,26 @@ public class Game implements ButtonClickListener {
         int toneType = mapButtonToTone(buttonId);
 
         activity.getHandler().postDelayed(() -> {
-
             changeButtonColor(buttonId, R.color.clicked_button_color);
             toneGenerator.startTone(toneType);
-
             activity.getHandler().postDelayed(() -> {
                 toneGenerator.stopTone();
                 changeButtonColor(buttonId, R.color.default_button_color);
             }, DURATION * 2);
-
         }, delay);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void updateRoundTextView(){
+        if(roundTextView != null){
+            activity.runOnUiThread(() -> roundTextView.setText("Round: " + activity.getCurrentRound()));
+        }
     }
 
     // Method to map a button ID to a tone type
     private int mapButtonToTone(int buttonId) {
         return buttonToToneMap.get(buttonId, ToneGenerator.TONE_DTMF_0);
     }
-
     private void changeButtonColor(int buttonId, int colorId) {
         activity.runOnUiThread(() -> {
             Button button = activity.findViewById(buttonId);

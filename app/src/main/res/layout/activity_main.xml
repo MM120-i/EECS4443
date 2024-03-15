@@ -49,10 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_1"
-            android:textColorHighlight="#6750A3"
-            android:textColorLink="#6750A3" />
+            android:layout_columnWeight="1" />
 
         <!-- Button 2 -->
         <Button
@@ -61,9 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_2"
-            android:textColorLink="#614B99" />
+            android:layout_columnWeight="1" />
 
         <!-- Button 3 -->
         <Button
@@ -72,8 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_3" />
+            android:layout_columnWeight="1"/>
 
         <!-- Button 4 -->
         <Button
@@ -82,8 +76,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_4" />
+            android:layout_columnWeight="1"/>
 
         <!-- Button 5 -->
         <Button
@@ -92,8 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_5" />
+            android:layout_columnWeight="1" />
 
         <!-- Button 6 -->
         <Button
@@ -102,8 +94,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_6" />
+            android:layout_columnWeight="1" />
 
         <!-- Button 7 -->
         <Button
@@ -112,8 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_7" />
+            android:layout_columnWeight="1" />
 
         <!-- Button 8 -->
         <Button
@@ -122,8 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_8" />
+            android:layout_columnWeight="1"/>
 
         <!-- Button 9 -->
         <Button
@@ -132,8 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_9" />
+            android:layout_columnWeight="1"/>
 
         <!-- Button 10 -->
         <Button
@@ -142,8 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_10" />
+            android:layout_columnWeight="1"/>
 
         <!-- Button 11 -->
         <Button
@@ -152,8 +139,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_11" />
+            android:layout_columnWeight="1"/>
 
         <!-- Button 12 -->
         <Button
@@ -162,8 +148,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:text="@string/button_12" />
+            android:layout_columnWeight="1"/>
 
     </GridLayout>
 
@@ -184,13 +169,13 @@
             android:text="@string/start" />
 
         <Button
-            android:id="@+id/nextButton"
+            android:id="@+id/endGameButton"
             style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="216dp"
-            android:text="@string/Next" />
+            android:layout_marginStart="122dp"
+            android:text="@string/end_game" />
 
     </LinearLayout>
 

@@ -15,6 +15,9 @@
     <string name="button_10">Button 10</string>
     <string name="button_11">Button 11</string>
     <string name="button_12">Button 12</string>
-    <string name="start">Start</string>
+    <string name="start">Start Round</string>
     <string name="Next">Next</string>
+    <string name="game_over">Game Over</string>
+    <string name="restart">Restart</string>
+    <string name="end_game">End Game</string>
 </resources>

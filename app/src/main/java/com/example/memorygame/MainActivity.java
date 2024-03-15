@@ -1,6 +1,7 @@
 package com.example.memorygame;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
@@ -10,23 +11,30 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.util.*;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     final static String MYDEBUG = "MYDEBUG";
     public static final int DURATION = 250; // Milliseconds
     protected final int NUMBER_OF_BOXES = 12;
+    public static int round = 0;
+    public static int highScore = 0;
     private ToneGenerator toneGenerator;
     private Handler handler;
     public Button startButton;
-    public Button nextButton;
+    public Button endGameButton;
     private ButtonClickListener buttonClickListener;
     public static int[] buttonIds = {R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5,
             R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button10,
             R.id.button11, R.id.button12};
     private boolean isButtonPressInProgress = false;
+    private boolean endGameButtonEnabled = true;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -39,20 +47,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler = new Handler();
 
         TextView roundTextView = findViewById(R.id.roundTextView);
-        int round = 0;
         roundTextView.setText("Round: " + round);
 
         TextView highScoreTextView = findViewById(R.id.highScoreTextView);
-        int highScore = 0;
         highScoreTextView.setText("High Score: " + highScore);
 
         startButton = findViewById(R.id.startButton);
-        nextButton = findViewById(R.id.nextButton);
+        endGameButton = findViewById(R.id.endGameButton);
 
         List<Button> buttons = new ArrayList<>();
 
         Game game = new Game(this);
         game.init(this);
+        game.setRoundTextView(roundTextView);
 
         // Add all the buttons to the list
         for (int i = 1; i <= NUMBER_OF_BOXES; i++) {
@@ -64,11 +71,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         startButton.setOnClickListener(this);
-        nextButton.setOnClickListener(this);
+        endGameButton.setOnClickListener(this);
     }
 
     public Handler getHandler(){
         return handler;
+    }
+
+    public int getCurrentRound(){
+        return round;
     }
 
     public void setButtonClickListener(ButtonClickListener listener){
@@ -84,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int id = view.getId();
         isButtonPressInProgress = true;
+
         // HashMap to map button IDs to their corresponding tones
         HashMap<Integer, Integer> buttonToneMap = new HashMap<>();
 
@@ -102,9 +114,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             playTone(toneType);
         }
 
-        if (id == R.id.nextButton) {
-            if(buttonClickListener != null){
-                buttonClickListener.onNextButtonClick();
+        if (id == R.id.endGameButton) {
+            if(endGameButtonEnabled){
+                onEndGameButtonClick();
+                endGameButtonEnabled = false;
             }
         }
         else if (id == R.id.startButton) {
@@ -115,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Change button colour when clicked.
         final Button clickedButton = findViewById(id);
-        int clickedColour = getResources().getColor(R.color.clicked_button_color);
+        int clickedColour = ContextCompat.getColor(getApplicationContext(), R.color.clicked_button_color);
         changeButtonColor(clickedButton, clickedColour, false);
         handler.postDelayed(() -> changeButtonColor(clickedButton, Color.TRANSPARENT, true), DURATION);
 
@@ -127,11 +140,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler.postDelayed(() -> toneGenerator.stopTone(), DURATION);
     }
 
+    public void onEndGameButtonClick(){
+        Intent gameOverIntent = new Intent(MainActivity.this, GameOverActivity.class);
+        gameOverIntent.putExtra("round", round);
+        startActivity(gameOverIntent);
+    }
+
     private void changeButtonColor(View button, int color, boolean revert) {
 
         runOnUiThread(() -> {
             if (revert) {
-                int defaultColor = getResources().getColor(R.color.default_button_color);
+                int defaultColor = ContextCompat.getColor(getApplicationContext(), R.color.default_button_color);
                 button.getBackground().setColorFilter(defaultColor, PorterDuff.Mode.SRC_ATOP);
             }
             else {
