@@ -18,6 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 
+/**
+ * MainActivity class responsible for handling the main functionality of the game.
+ * It implements View.OnClickListener to handle button clicks.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     final static String MYDEBUG = "MYDEBUG";
@@ -30,12 +34,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public Button startButton;
     public Button endGameButton;
     private ButtonClickListener buttonClickListener;
+
+    // Array containing IDs of all buttons in the game
     public static int[] buttonIds = {R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5,
             R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button10,
             R.id.button11, R.id.button12};
     private boolean isButtonPressInProgress = false;
     private boolean endGameButtonEnabled = true;
 
+    /**
+     * Initializes the activity when created.
+     * Sets up the layout, initializes UI components, and prepares the game.
+     *
+     * @param savedInstanceState A Bundle containing the activity's previously saved state, or null if none exists.
+     */
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,20 +55,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize ToneGenerator to play button click sounds
         toneGenerator = new ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME);
         handler = new Handler();
 
+        // Set up TextView to display current round number
         TextView roundTextView = findViewById(R.id.roundTextView);
         roundTextView.setText("Round: " + round);
 
+        // Set up TextView to display high score
         TextView highScoreTextView = findViewById(R.id.highScoreTextView);
         highScoreTextView.setText("High Score: " + highScore);
 
+        // Initialize start and end button
         startButton = findViewById(R.id.startButton);
         endGameButton = findViewById(R.id.endGameButton);
 
         List<Button> buttons = new ArrayList<>();
 
+        // Create and initialize game instance
         Game game = new Game(this);
         game.init(this);
         game.setRoundTextView(roundTextView);
@@ -70,22 +87,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             buttons.add(button);
         }
 
+        // Set click listeners for start and end game buttons
         startButton.setOnClickListener(this);
         endGameButton.setOnClickListener(this);
     }
 
+    /**
+     * Retrieves the Handler object associated with this activity.
+     *
+     * @return The Handler object for managing delayed operations.
+     */
     public Handler getHandler(){
         return handler;
     }
 
+    /**
+     * Retrieves the current round number of the game.
+     *
+     * @return The current round number.
+     */
     public int getCurrentRound(){
         return round;
     }
 
+    /**
+     * Sets the listener for button click events.
+     *
+     * @param listener The ButtonClickListener object to handle button click events.
+     */
     public void setButtonClickListener(ButtonClickListener listener){
         this.buttonClickListener = listener;
     }
 
+    /**
+     * Handles the click events of buttons in the activity.
+     *
+     * @param view The View object representing the clicked button.
+     */
     @Override
     public void onClick(View view) {
 
@@ -135,20 +173,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isButtonPressInProgress = false;
     }
 
+    /**
+     * Plays a tone using the ToneGenerator with the specified tone type.
+     * After playing the tone, it stops the tone after a certain duration.
+     *
+     * @param toneType The type of tone to be played.
+     */
     private void playTone(int toneType) {
         toneGenerator.startTone(toneType);
         handler.postDelayed(() -> toneGenerator.stopTone(), DURATION);
     }
 
+    /**
+     * Handles the button click event for the "End Game" button.
+     * Starts the GameOverActivity and passes the current round as an extra.
+     */
     public void onEndGameButtonClick(){
         Intent gameOverIntent = new Intent(MainActivity.this, GameOverActivity.class);
         gameOverIntent.putExtra("round", round);
         startActivity(gameOverIntent);
     }
 
+    /**
+     * Changes the color of the specified button.
+     *
+     * @param button The button to change the color of.
+     * @param color The color to set for the button.
+     * @param revert Flag indicating whether to revert the button's color to the default color.
+     */
     private void changeButtonColor(View button, int color, boolean revert) {
 
         runOnUiThread(() -> {
+
             if (revert) {
                 int defaultColor = ContextCompat.getColor(getApplicationContext(), R.color.default_button_color);
                 button.getBackground().setColorFilter(defaultColor, PorterDuff.Mode.SRC_ATOP);
@@ -160,6 +216,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * Called when the activity is about to be destroyed.
+     * Releases the resources used by the ToneGenerator.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -170,6 +230,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 }
-
-
-
