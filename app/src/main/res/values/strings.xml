@@ -20,4 +20,6 @@
     <string name="game_over">Game Over</string>
     <string name="restart">Restart</string>
     <string name="end_game">End Game</string>
+    <string name="correct_sequences">Correct Sequences:</string>
+    <string name="incorrect_sequences">Incorrect Sequence:</string>
 </resources>

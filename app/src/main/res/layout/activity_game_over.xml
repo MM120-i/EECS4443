@@ -7,7 +7,6 @@
 
     <!-- Game Over title -->
 
-    <!-- Round TextView -->
     <TextView
         android:id="@+id/gameOverTitleTextView"
         android:layout_width="wrap_content"
@@ -21,7 +20,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Restart Button -->
+    <TextView
+        android:id="@+id/correctSequencesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/correct_sequences"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/incorrectSequencesTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameOverTitleTextView"
+        app:layout_constraintVertical_bias="0.146"
+        tools:ignore="UnknownId" />
+
+    <TextView
+        android:id="@+id/incorrectSequencesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/incorrect_sequences"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/roundTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/correctSequencesTextView"
+        app:layout_constraintVertical_bias="0.146"/>
+
 
     <TextView
         android:id="@+id/roundTextView"
@@ -29,11 +54,13 @@
         android:layout_height="wrap_content"
         android:text="@string/round"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/restartButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameOverTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/gameOverTitleTextView"
+        app:layout_constraintVertical_bias="0.146"/>
 
     <Button
         android:id="@+id/restartButton"
@@ -53,7 +80,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/restartButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameOverTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/gameOverTitleTextView"
+        app:layout_constraintVertical_bias="0.693" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
