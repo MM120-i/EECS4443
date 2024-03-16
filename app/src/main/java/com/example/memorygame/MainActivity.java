@@ -17,7 +17,6 @@ import java.util.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-
 /**
  * MainActivity class responsible for handling the main functionality of the game.
  * It implements View.OnClickListener to handle button clicks.
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        if(isButtonPressInProgress){
+        if (isButtonPressInProgress) {
             return;
         }
 
@@ -152,25 +151,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             playTone(toneType);
         }
 
-        if (id == R.id.endGameButton) {
-            if(endGameButtonEnabled){
-                onEndGameButtonClick();
-                endGameButtonEnabled = false;
-            }
-        }
-        else if (id == R.id.startButton) {
-            if(buttonClickListener != null){
-                buttonClickListener.onStartButtonClick();
-            }
-        }
-
         // Change button colour when clicked.
         final Button clickedButton = findViewById(id);
         int clickedColour = ContextCompat.getColor(getApplicationContext(), R.color.clicked_button_color);
         changeButtonColor(clickedButton, clickedColour, false);
         handler.postDelayed(() -> changeButtonColor(clickedButton, Color.TRANSPARENT, true), DURATION);
 
+        buttonFunctionalities(id);
+
         isButtonPressInProgress = false;
+    }
+
+    /**
+     * Handles the functionality associated with button clicks.
+     * If the clicked button is not the start button, it enables the start button.
+     * If the clicked button is the end game button, it triggers the end game action.
+     * If the clicked button is the start button and it is enabled, it triggers the start button action.
+     * Otherwise, it disables the start button after clicking it.
+     *
+     * @param id The ID of the clicked button.
+     */
+    private void buttonFunctionalities(int id){
+
+        // Enable the start button if the clicked button is not the start button
+        if(id != R.id.startButton){
+            startButton.setEnabled(true);
+        }
+
+        // Trigger the end game action if the clicked button is the end game button
+        if (id == R.id.endGameButton) {
+
+            if(endGameButtonEnabled){
+                onEndGameButtonClick();
+                endGameButtonEnabled = false;
+            }
+        }     // Trigger the start button action if the clicked button is the start button and it is enabled
+        else if (id == R.id.startButton) {
+
+            if (buttonClickListener != null) {
+
+                if (startButton.isEnabled()) {
+                    buttonClickListener.onStartButtonClick();
+                }
+            }
+            // Disable the Start button after clicking it
+            startButton.setEnabled(false);
+        }
     }
 
     /**
@@ -222,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
         // Release ToneGenerator resources
         if (toneGenerator != null) {

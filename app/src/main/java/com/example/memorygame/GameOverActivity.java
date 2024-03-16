@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import static com.example.memorygame.MainActivity.round;
 import static com.example.memorygame.MainActivity.highScore;
+import static com.example.memorygame.Game.MAX_ROUNDS;
+import static com.example.memorygame.Game.totalTime;
+
 
 /**
  * This activity represents the game over screen, displayed to the user when the game ends.
@@ -33,7 +36,7 @@ public class GameOverActivity extends AppCompatActivity{
 
         // Retrieve high score from intent extras and display it in the TextView
         int highScore =  getIntent().getIntExtra("high score", 0);
-        TextView scoreTextView = findViewById(R.id.highScoreTextView);
+        TextView scoreTextView = (TextView) findViewById(R.id.highScoreTextView);
         scoreTextView.setText("High Score: " + highScore);
 
         // Retrieve round from intent extras and display it in the TextView
@@ -41,19 +44,40 @@ public class GameOverActivity extends AppCompatActivity{
         TextView roundTextView = findViewById(R.id.roundTextView);
         roundTextView.setText("Round: " + round);
 
+        long averageTimePerRoundMillis = getIntent().getLongExtra("average_time_per_round", 0);
+        long averageTimePerRoundSecs = averageTimePerRoundMillis / 1000; // Convert milliseconds to seconds
+
+        if(round == MAX_ROUNDS){
+            TextView averageTimeTextView = findViewById(R.id.averageTimeTextView);
+            averageTimeTextView.setText("Average Time per round: " + averageTimePerRoundSecs + " s");
+        }
+        else{
+            TextView averageTimeTextView = findViewById(R.id.averageTimeTextView);
+            averageTimeTextView.setText("Game not completed");
+        }
+
+        // Calculate completion percentage based on the number of rounds completed
+        int completionPercentage = (round * 100) / MAX_ROUNDS;
+        TextView completionPercentageTextView = findViewById(R.id.completionPercentageTextView);
+        completionPercentageTextView.setText("Completion: " + completionPercentage + "%");
+
         // Set up a click listener for the restartButton to restart the game
         Button restartButton = findViewById(R.id.restartButton);
         restartButton.setOnClickListener(v -> restartGame());
     }
 
     /**
-     * This method restarts the game by resetting the round and high score to zero, then creating a new
+     * This method restarts the game by resetting the round and total time, then creating a new
      * intent to launch the MainActivity.
      */
+    @SuppressLint("SetTextI18n")
     private void restartGame() {
 
         round = 0;
-        highScore = 0;
+        totalTime = 0;
+
+        TextView completionPercentageTextView = findViewById(R.id.completionPercentageTextView);
+        completionPercentageTextView.setText("Completion: 0%");
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("round", round);
@@ -64,5 +88,6 @@ public class GameOverActivity extends AppCompatActivity{
         // Finish the current activity to remove it from the stack
         finish();
     }
+
 
 }

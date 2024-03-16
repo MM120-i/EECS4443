@@ -20,33 +20,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
-        android:id="@+id/correctSequencesTextView"
+        android:id="@+id/accuracy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/correct_sequences"
+        android:text="@string/accurate"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/incorrectSequencesTextView"
+        app:layout_constraintBottom_toTopOf="@+id/errorRate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameOverTitleTextView"
         app:layout_constraintVertical_bias="0.146"
         tools:ignore="UnknownId" />
 
     <TextView
-        android:id="@+id/incorrectSequencesTextView"
+        android:id="@+id/errorRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/incorrect_sequences"
+        android:text="@string/error"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/roundTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correctSequencesTextView"
-        app:layout_constraintVertical_bias="0.146"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/accuracy"
+        app:layout_constraintVertical_bias="0.146" />
 
     <TextView
         android:id="@+id/roundTextView"
@@ -54,13 +52,13 @@
         android:layout_height="wrap_content"
         android:text="@string/round"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/restartButton"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/restartButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameOverTitleTextView"
-        app:layout_constraintVertical_bias="0.146"/>
+        app:layout_constraintVertical_bias="0.146" />
 
     <Button
         android:id="@+id/restartButton"
@@ -83,7 +81,30 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameOverTitleTextView"
-        app:layout_constraintVertical_bias="0.693" />
+        app:layout_constraintVertical_bias="0.624" />
+
+    <TextView
+        android:id="@+id/averageTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Time"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/restartButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/highScoreTextView"
+        app:layout_constraintVertical_bias="0.17" />
+
+    <TextView
+        android:id="@+id/completionPercentageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/completionPercentage"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/restartButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/averageTimeTextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,8 @@
     <string name="game_over">Game Over</string>
     <string name="restart">Restart</string>
     <string name="end_game">End Game</string>
-    <string name="correct_sequences">Correct Sequences:</string>
-    <string name="incorrect_sequences">Incorrect Sequence:</string>
+    <string name="accurate">Accuracy:</string>
+    <string name="error">Error Rate:</string>
+    <string name="Time">Average Time per round:</string>
+    <string name="completionPercentage">Completion:</string>
 </resources>

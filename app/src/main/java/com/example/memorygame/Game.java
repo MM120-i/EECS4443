@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -26,12 +27,16 @@ import androidx.core.content.ContextCompat;
  * activity.
  */
 public class Game implements ButtonClickListener {
+
     final static String MYDEBUG = "MYDEBUG";
     private final MainActivity activity;
     private final ToneGenerator toneGenerator;
     private TextView roundTextView;
     private boolean startButtonEnabled = true;
-    private final int MAX_ROUNDS = 5;   // This can be changed ofc. But for now we r keeping the max laps to 5.
+    public static long totalTime  = 0;
+
+    private final HashMap<Integer, Long> roundStartTimeMap = new HashMap<>();
+    public static final int MAX_ROUNDS = 5;   // This can be changed ofc. But for now we r keeping the max laps to 5.
 
     // Mapping of button IDs to tone types.
     private static final SparseIntArray buttonToToneMap = new SparseIntArray();
@@ -91,13 +96,32 @@ public class Game implements ButtonClickListener {
         // Check if the Start button is enabled and if the maximum number of rounds has not been reached
         if (startButtonEnabled && round < MAX_ROUNDS) {
             startButtonEnabled = false;
+            roundStartTimeMap.put(round, System.currentTimeMillis());
             playRandomPattern();
-            activity.getHandler().postDelayed(() -> startButtonEnabled = true, DURATION * 3); // Adjust the delay as needed
+            activity.getHandler().postDelayed(() -> startButtonEnabled = true, DURATION * 3);
         }
         // Launch the GameOverActivity if the maximum rounds are reached
-        else if(round >= MAX_ROUNDS){
+        else if (round >= MAX_ROUNDS) {
+            // Calculate and pass the average time per round to the GameOverActivity
+            int lapsCompleted = 0; // Variable to track completed laps
+
+            for (int i = 1; i <= round; i++) {
+                if (roundStartTimeMap.containsKey(i)) {
+                    Long startTime = roundStartTimeMap.get(i);
+                    if (startTime != null) {
+                        totalTime += System.currentTimeMillis() - startTime;
+                        lapsCompleted++;
+                    }
+                }
+            }
+
+            // Calculate average time per round only if laps were completed
+            long averageTimePerRound = (lapsCompleted > 0) ? totalTime / lapsCompleted : 0;
+
+            // Launch GameOverActivity with the average time per round and accuracy rate
             Intent intent = new Intent(activity, GameOverActivity.class);
             intent.putExtra("round", round);
+            intent.putExtra("average_time_per_round", averageTimePerRound);
             activity.startActivity(intent);
         }
     }
@@ -148,9 +172,11 @@ public class Game implements ButtonClickListener {
             previousButtonId = buttonId;
 
             // Add the button ID to the pattern list, play the corresponding tone, and change button color
-            pattern.add(buttonId);
+            //pattern.add(buttonId);
             playToneAndChangeColor(buttonId, delay);
             delay += (DURATION + 90);
+
+            pattern.add(buttonId);
         }
 
         // Update the round text view after determining the number of beeps
