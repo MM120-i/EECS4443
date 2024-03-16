@@ -1,13 +1,17 @@
 package com.example.memorygame;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.id.button11, R.id.button12};
     private boolean isButtonPressInProgress = false;
     private boolean endGameButtonEnabled = true;
+    private Vibrator vibrator;
 
     /**
      * Initializes the activity when created.
@@ -53,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize vibrator
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // Initialize ToneGenerator to play button click sounds
         toneGenerator = new ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME);
@@ -128,6 +136,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (isButtonPressInProgress) {
             return;
+        }
+
+        // Vibrate when a button is clicked.
+        if(vibrator != null && vibrator.hasVibrator()) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+            }
+            else{
+                vibrator.vibrate(50);
+            }
         }
 
         int id = view.getId();
@@ -250,10 +269,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy() {
 
         super.onDestroy();
+
         // Release ToneGenerator resources
         if (toneGenerator != null) {
             toneGenerator.release();
             toneGenerator = null;
+        }
+
+        // Release vibrator resources and all that stuff
+        if(vibrator != null){
+            vibrator.cancel();
         }
     }
 }
