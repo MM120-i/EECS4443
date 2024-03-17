@@ -34,7 +34,9 @@ public class Game implements ButtonClickListener {
     private TextView roundTextView;
     private boolean startButtonEnabled = true;
     public static long totalTime  = 0;
-
+    private static final List<Integer> userInputList = new ArrayList<>();
+    private final List<Integer> allPatterns = new ArrayList<>();
+    public static double accuracyRate;
     private final HashMap<Integer, Long> roundStartTimeMap = new HashMap<>();
     public static final int MAX_ROUNDS = 5;   // This can be changed ofc. But for now we r keeping the max laps to 5.
 
@@ -102,12 +104,16 @@ public class Game implements ButtonClickListener {
         }
         // Launch the GameOverActivity if the maximum rounds are reached
         else if (round >= MAX_ROUNDS) {
+
             // Calculate and pass the average time per round to the GameOverActivity
             int lapsCompleted = 0; // Variable to track completed laps
 
             for (int i = 1; i <= round; i++) {
+
                 if (roundStartTimeMap.containsKey(i)) {
+
                     Long startTime = roundStartTimeMap.get(i);
+
                     if (startTime != null) {
                         totalTime += System.currentTimeMillis() - startTime;
                         lapsCompleted++;
@@ -122,7 +128,12 @@ public class Game implements ButtonClickListener {
             Intent intent = new Intent(activity, GameOverActivity.class);
             intent.putExtra("round", round);
             intent.putExtra("average_time_per_round", averageTimePerRound);
+            intent.putExtra("accuracy_rate", accuracyRate);
             activity.startActivity(intent);
+
+            MainActivity.passUserInputsToGame();
+
+            accuracy();
         }
     }
 
@@ -172,11 +183,11 @@ public class Game implements ButtonClickListener {
             previousButtonId = buttonId;
 
             // Add the button ID to the pattern list, play the corresponding tone, and change button color
-            //pattern.add(buttonId);
             playToneAndChangeColor(buttonId, delay);
             delay += (DURATION + 90);
 
             pattern.add(buttonId);
+            allPatterns.add(buttonId);
         }
 
         // Update the round text view after determining the number of beeps
@@ -215,6 +226,43 @@ public class Game implements ButtonClickListener {
         if(roundTextView != null){
             activity.runOnUiThread(() -> roundTextView.setText("Round: " + activity.getCurrentRound()));
         }
+    }
+
+    /**
+     * Stores the user inputs in the {@code userInputList}.
+     *
+     * @param userInput The list of integers representing the user inputs.
+     */
+    public static void storeUserInputs(List<Integer> userInput){
+
+        if(userInput == null){
+            userInput = new ArrayList<>();
+        }
+
+        userInputList.addAll(userInput);
+    }
+
+    /**
+     * Calculates the accuracy rate of the user inputs compared to the generated patterns.
+     * The accuracy rate is calculated as the percentage of matching inputs with respect to all patterns.
+     * The result is stored in the {@code accuracyRate} variable.
+     */
+    public void accuracy() {
+
+        int match = 0, notmatch = 0; // We will make use of this 'notmatch' variable later to calculate error rate. For now it has no use.
+        int minLength = Math.min(userInputList.size(), allPatterns.size());
+
+        // Loop through the user inputs and patterns to compare each element
+        for (int i = 0; i < minLength; i++) {
+            if (userInputList.get(i).equals(allPatterns.get(i))) {
+                match++;
+            }
+            else {
+                notmatch++;
+            }
+        }
+
+        accuracyRate = (double) match / allPatterns.size() * 100;
     }
 
     /**

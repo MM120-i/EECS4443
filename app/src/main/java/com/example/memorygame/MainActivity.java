@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isButtonPressInProgress = false;
     private boolean endGameButtonEnabled = true;
     private Vibrator vibrator;
+    private static List<Integer> userInputs;
 
     /**
      * Initializes the activity when created.
@@ -84,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Game game = new Game(this);
         game.init(this);
         game.setRoundTextView(roundTextView);
+
+        // Initialize user inputs list
+        userInputs = new ArrayList<>();
 
         // Add all the buttons to the list
         for (int i = 1; i <= NUMBER_OF_BOXES; i++) {
@@ -168,6 +172,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Integer toneType = buttonToneMap.get(id);
         if (toneType != null) {
             playTone(toneType);
+        }
+
+        // Store user inputs when a button is clicked
+        if(id != R.id.startButton && id != R.id.endGameButton){
+            userInputs.add(id);
         }
 
         // Change button colour when clicked.
@@ -259,6 +268,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 handler.postDelayed(() -> changeButtonColor(button, Color.TRANSPARENT, true), DURATION);
             }
         });
+    }
+
+    /**
+     * Passes the user inputs collected in the MainActivity to the Game class for storage.
+     * Clears the userInputs list after passing the inputs to the Game class.
+     * This method ensures that the user inputs are stored and processed by the Game logic.
+     */
+    public static void passUserInputsToGame(){
+        Game.storeUserInputs(userInputs);
+        userInputs.clear();
     }
 
     /**
