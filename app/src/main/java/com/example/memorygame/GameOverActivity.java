@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static com.example.memorygame.Game.accuracyRate;
+import static com.example.memorygame.Game.errorRate;
 import static com.example.memorygame.MainActivity.round;
 import static com.example.memorygame.MainActivity.highScore;
 import static com.example.memorygame.Game.MAX_ROUNDS;
@@ -36,11 +37,6 @@ public class GameOverActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
-
-        // Retrieve the error rate and display it in the TextView
-        double errorRate = getIntent().getDoubleExtra("error_rate", 0);
-        TextView errorRateTextView = findViewById(R.id.errorRate);
-        errorRateTextView.setText("Error Rate: " + errorRate + "%");
 
         // Retrieve high score from intent extras and display it in the TextView
         int highScore =  getIntent().getIntExtra("high score", 0);
@@ -75,6 +71,9 @@ public class GameOverActivity extends AppCompatActivity{
         TextView accuracyRateTextView = findViewById(R.id.accuracy);
         accuracyRateTextView.setText("Accuracy Rate: " + new DecimalFormat("##.##").format(accuracyRate) + "%");
 
+        TextView errorRateTextView = findViewById(R.id.errorRate);
+        errorRateTextView.setText("Error Rate: " + new DecimalFormat("##.##").format(errorRate) + "%");
+
         // Set up a click listener for the restartButton to restart the game
         Button restartButton = findViewById(R.id.restartButton);
         restartButton.setOnClickListener(v -> restartGame());
@@ -90,6 +89,7 @@ public class GameOverActivity extends AppCompatActivity{
         round = 0;
         totalTime = 0;
         accuracyRate = 0.0;
+        errorRate = 0.0;
 
         TextView completionPercentageTextView = findViewById(R.id.completionPercentageTextView);
         completionPercentageTextView.setText("Completion: 0%");
@@ -98,6 +98,7 @@ public class GameOverActivity extends AppCompatActivity{
         intent.putExtra("round", round);
         intent.putExtra("high score", highScore);
         intent.putExtra("accuracy_rate", accuracyRate);
+        intent.putExtra("error_rate", errorRate);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 

@@ -34,6 +34,7 @@ public class Game implements ButtonClickListener {
     private TextView roundTextView;
     private boolean startButtonEnabled = true;
     public static long totalTime  = 0;
+    public static double errorRate;
     private static final List<Integer> userInputList = new ArrayList<>();
     private final List<Integer> allPatterns = new ArrayList<>();
     public static double accuracyRate;
@@ -129,6 +130,7 @@ public class Game implements ButtonClickListener {
             intent.putExtra("round", round);
             intent.putExtra("average_time_per_round", averageTimePerRound);
             intent.putExtra("accuracy_rate", accuracyRate);
+            intent.putExtra("error_rate", errorRate);
             activity.startActivity(intent);
 
             MainActivity.passUserInputsToGame();
@@ -243,13 +245,13 @@ public class Game implements ButtonClickListener {
     }
 
     /**
-     * Calculates the accuracy rate of the user inputs compared to the generated patterns.
-     * The accuracy rate is calculated as the percentage of matching inputs with respect to all patterns.
-     * The result is stored in the {@code accuracyRate} variable.
+     * Calculates the accuracy rate and error rate based on user inputs and generated patterns.
+     * Accuracy rate is calculated as the percentage of correct matches out of total matches.
+     * Error rate is calculated as the percentage of incorrect matches out of total matches.
      */
     public void accuracy() {
 
-        int match = 0, notmatch = 0; // We will make use of this 'notmatch' variable later to calculate error rate. For now it has no use.
+        int match = 0, notmatch = 0;
         int minLength = Math.min(userInputList.size(), allPatterns.size());
 
         // Loop through the user inputs and patterns to compare each element
@@ -262,7 +264,18 @@ public class Game implements ButtonClickListener {
             }
         }
 
+        // Calculate the accuracy rate as the percentage of correct matches out of total matches
         accuracyRate = (double) match / allPatterns.size() * 100;
+
+        int totalMatches = match + notmatch;
+
+        // Calculate the error rate as the percentage of incorrect matches out of total matches
+        if(totalMatches > 0){
+            errorRate = ((double) notmatch / totalMatches) * 100;
+        }
+        else{
+            errorRate = 0.0;
+        }
     }
 
     /**
