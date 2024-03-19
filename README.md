@@ -11,6 +11,10 @@ The app focuses on memory retention and improvement, mainly speed, accuracy, fle
 
 * Java
 * Android Studio
+* XML
+* Android SDK
+* Gradle
+* Git
 
 ## Setup/Installation Requirements
 To run this project, you need to have Android Studio installed on your machine. If you haven't already installed Android Studio, you can download it from the official Android Studio website.
