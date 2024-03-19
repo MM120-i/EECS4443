@@ -1,7 +1,9 @@
 package com.example.memorygame;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,7 +23,7 @@ import java.text.DecimalFormat;
 /**
  * This activity represents the game over screen, displayed to the user when the game ends.
  */
-public class GameOverActivity extends AppCompatActivity{
+public class GameOverActivity extends AppCompatActivity implements ScoreManager{
 
     /**
      * This method is called when the activity is first created. It initializes the layout and retrieves
@@ -38,10 +40,14 @@ public class GameOverActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
-        // Retrieve high score from intent extras and display it in the TextView
-        int highScore =  getIntent().getIntExtra("high score", 0);
-        TextView scoreTextView = (TextView) findViewById(R.id.highScoreTextView);
-        scoreTextView.setText("High Score: " + highScore);
+        int prevHighScore = getHighScore();
+
+        if(highScore > prevHighScore){
+            saveHighScore(highScore);
+        }
+
+        TextView scoreTextView = findViewById(R.id.highScoreTextView);
+        scoreTextView.setText("High Score: " + getHighScore());
 
         // Retrieve round from intent extras and display it in the TextView
         int round = getIntent().getIntExtra("round", 0);
@@ -80,6 +86,30 @@ public class GameOverActivity extends AppCompatActivity{
     }
 
     /**
+     * Saves the high score to SharedPreferences.
+     *
+     * @param score The high score to be saved.
+     */
+    @Override
+    public void saveHighScore(int score) {
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(HIGH_SCORE_KEY, score);
+        editor.apply();
+    }
+
+    /**
+     * Retrieves the high score from SharedPreferences.
+     *
+     * @return The high score retrieved from SharedPreferences, or 0 if not found.
+     */
+    @Override
+    public int getHighScore() {
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return prefs.getInt(HIGH_SCORE_KEY, 0);
+    }
+
+    /**
      * This method restarts the game by resetting the round and total time, then creating a new
      * intent to launch the MainActivity.
      */
@@ -91,6 +121,7 @@ public class GameOverActivity extends AppCompatActivity{
         accuracyRate = 0.0;
         errorRate = 0.0;
 
+        Game.userInputList.clear();
         TextView completionPercentageTextView = findViewById(R.id.completionPercentageTextView);
         completionPercentageTextView.setText("Completion: 0%");
 

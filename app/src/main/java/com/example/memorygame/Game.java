@@ -17,6 +17,7 @@ import java.util.Random;
 //Static imports
 import static com.example.memorygame.MainActivity.DURATION;
 import static com.example.memorygame.MainActivity.buttonIds;
+import static com.example.memorygame.MainActivity.highScore;
 import static com.example.memorygame.MainActivity.round;
 
 import androidx.core.content.ContextCompat;
@@ -35,7 +36,7 @@ public class Game implements ButtonClickListener {
     private boolean startButtonEnabled = true;
     public static long totalTime  = 0;
     public static double errorRate;
-    private static final List<Integer> userInputList = new ArrayList<>();
+    static final List<Integer> userInputList = new ArrayList<>();
     private final List<Integer> allPatterns = new ArrayList<>();
     public static double accuracyRate;
     private final HashMap<Integer, Long> roundStartTimeMap = new HashMap<>();
@@ -128,6 +129,7 @@ public class Game implements ButtonClickListener {
             // Launch GameOverActivity with the average time per round and accuracy rate
             Intent intent = new Intent(activity, GameOverActivity.class);
             intent.putExtra("round", round);
+            intent.putExtra("high score", highScore);
             intent.putExtra("average_time_per_round", averageTimePerRound);
             intent.putExtra("accuracy_rate", accuracyRate);
             intent.putExtra("error_rate", errorRate);
@@ -256,6 +258,7 @@ public class Game implements ButtonClickListener {
 
         // Loop through the user inputs and patterns to compare each element
         for (int i = 0; i < minLength; i++) {
+
             if (userInputList.get(i).equals(allPatterns.get(i))) {
                 match++;
             }
@@ -275,6 +278,36 @@ public class Game implements ButtonClickListener {
         }
         else{
             errorRate = 0.0;
+        }
+
+        // Calling ths score board method to settle the score.
+        scoreBoard();
+    }
+
+    /**
+     * Calculates the high score based on the accuracy rate based on the following:
+     * If the accuracy rate is between 60% and 69%, the high score is set to 1.
+     * If the accuracy rate is between 70% and 79%, the high score is set to 2.
+     * If the accuracy rate is between 80% and 99%, the high score is set to 3.
+     * If the accuracy rate is 100%, the high score is set to 5.
+     * Otherwise, the high score is set to 0.
+     */
+    private void scoreBoard(){
+
+        if(accuracyRate >= 60 && accuracyRate < 70){
+            highScore = 1;
+        }
+        else if(accuracyRate >= 70 && accuracyRate < 80){
+            highScore = 2;
+        }
+        else if(accuracyRate >= 80 && accuracyRate < 100){
+            highScore = 3;
+        }
+        else if(accuracyRate >= 100){
+            highScore = 5;
+        }
+        else{
+            highScore = 0;
         }
     }
 

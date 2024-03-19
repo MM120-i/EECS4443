@@ -3,6 +3,7 @@ package com.example.memorygame;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
@@ -25,7 +26,7 @@ import androidx.core.content.ContextCompat;
  * MainActivity class responsible for handling the main functionality of the game.
  * It implements View.OnClickListener to handle button clicks.
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ScoreManager {
 
     final static String MYDEBUG = "MYDEBUG";
     public static final int DURATION = 250; // Milliseconds
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         roundTextView.setText("Round: " + round);
 
         // Set up TextView to display high score
+        highScore = getHighScore();
         TextView highScoreTextView = findViewById(R.id.highScoreTextView);
         highScoreTextView.setText("High Score: " + highScore);
 
@@ -101,6 +103,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Set click listeners for start and end game buttons
         startButton.setOnClickListener(this);
         endGameButton.setOnClickListener(this);
+    }
+
+    /**
+     * Saves the high score to SharedPreferences.
+     *
+     * @param score The high score to be saved.
+     */
+    @Override
+    public void saveHighScore(int score) {
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(HIGH_SCORE_KEY, score);
+        editor.apply();
+    }
+
+    /**
+     * Retrieves the high score from SharedPreferences.
+     *
+     * @return The high score retrieved from SharedPreferences, or 0 if not found.
+     */
+    @Override
+    public int getHighScore(){
+        SharedPreferences prefs = getSharedPreferences(GameOverActivity.PREF_NAME, Context.MODE_PRIVATE);
+        return prefs.getInt(GameOverActivity.HIGH_SCORE_KEY, 0); // Default value is 0
     }
 
     /**
@@ -299,5 +325,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(vibrator != null){
             vibrator.cancel();
         }
+    }
+
+    /**
+     * Called when the activity is no longer visible to the user.
+     * Saves the current high score to SharedPreferences before the activity is stopped.
+     */
+    @Override
+    protected void onStop(){
+        super.onStop();
+        saveHighScore(highScore);
     }
 }
