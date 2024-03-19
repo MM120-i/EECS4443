@@ -24,4 +24,29 @@
     <string name="error">Error Rate:</string>
     <string name="Time">Average Time per round:</string>
     <string name="completionPercentage">Completion:</string>
+    <string name="rules">Rules</string>
+    <string name="read_rules">Read Rules</string>
+    <string name="rules_text">
+        <![CDATA[
+        <big>Welcome to Memory Game!</big><br/><br/><br>
+        <big><b>Objective:</b></big><br/> <br>Exercise your memory retention skills by replicating sequences of button presses.<br/><br/> <br>
+        <big><b>How to Play:</b></big><br/> <br>
+        <b>1. Click the "Start Round" button to begin the round.</b><br/>
+        <b>2. When the round starts, a random sequence of button presses will be displayed and played out.</b><br/>
+        <b>3. Your task is to replicate the sequence by pressing the buttons in the same order.</b><br/>
+        <b>4. As you progress through the game, the sequence will become longer, making the game more challenging.</b><br/><br/>
+        <big><b>Scoring:</b></big><br/> <br>
+        Your score is based on your accuracy rate, which is the percentage of correctly replicated sequences compared to the total sequences played.<br/> <br>
+        High scores are determined as follows:<br/> <br>
+        If your accuracy rate is between 60% and 69%, your high score is 1.<br/> <br>
+        If your accuracy rate is between 70% and 79%, your high score is 2.<br/> <br>
+        If your accuracy rate is between 80% and 99%, your high score is 3.<br/> <br>
+        If your accuracy rate is 100%, your high score is 5.<br/> <br>
+        Otherwise, your high score is 0.<br/><br/> <br>
+        <big><b>Statistics:</b></big><br/>
+        Your average round time is recorded as you play through the game, providing insight into your performance.<br/><br/>
+        <big>Get ready to challenge your memory and aim for the high score!</big>
+        ]]>
+    </string>
+
 </resources>

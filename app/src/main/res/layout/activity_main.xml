@@ -30,6 +30,17 @@
             android:text="@string/high_score"
             android:textSize="24sp" />
 
+        <!-- Rule Button -->
+        <Button
+            android:id="@+id/rule"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="1dp"
+            android:text="@string/rules"
+            android:textSize="13sp"/>
+
     </LinearLayout>
 
     <!-- Button grid -->

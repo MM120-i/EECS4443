@@ -95,6 +95,7 @@ public class Game implements ButtonClickListener {
      */
     @Override
     public void onStartButtonClick() {
+
         Log.i(MYDEBUG, "Start button clicked.");
 
         // Check if the Start button is enabled and if the maximum number of rounds has not been reached

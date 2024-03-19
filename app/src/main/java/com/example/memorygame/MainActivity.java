@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // The rules activity
+        Button newButton = findViewById(R.id.rule);
+        newButton.setOnClickListener(v -> openRulesActivity());
+
         // Initialize vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -103,6 +107,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Set click listeners for start and end game buttons
         startButton.setOnClickListener(this);
         endGameButton.setOnClickListener(this);
+    }
+
+    /**
+     * Opens the RulesActivity to display the rules of the game.
+     */
+    private void openRulesActivity() {
+        Intent intent = new Intent(this, RulesActivity.class);
+        startActivity(intent);
     }
 
     /**
