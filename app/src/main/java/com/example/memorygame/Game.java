@@ -2,9 +2,9 @@ package com.example.memorygame;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
-import android.util.Log;
 import android.util.SparseIntArray;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,7 +29,6 @@ import androidx.core.content.ContextCompat;
  */
 public class Game implements ButtonClickListener {
 
-    final static String MYDEBUG = "MYDEBUG";
     private final MainActivity activity;
     private final ToneGenerator toneGenerator;
     private TextView roundTextView;
@@ -80,14 +79,6 @@ public class Game implements ButtonClickListener {
     }
 
     /**
-     * Handles the action when the "End Game" button is clicked.
-     */
-    @Override
-    public void onEndGameButtonClick() {
-        Log.i(MYDEBUG, "End Game button clicked.");
-    }
-
-    /**
      * Handles the action when the "Start" button is clicked. It checks if the button is enabled
      * and if the maximum number of rounds has not been reached. If conditions are met, it initiates
      * the game by playing a random pattern. If the maximum rounds are reached, it launches the
@@ -95,8 +86,6 @@ public class Game implements ButtonClickListener {
      */
     @Override
     public void onStartButtonClick() {
-
-        Log.i(MYDEBUG, "Start button clicked.");
 
         // Check if the Start button is enabled and if the maximum number of rounds has not been reached
         if (startButtonEnabled && round < MAX_ROUNDS) {
@@ -162,8 +151,7 @@ public class Game implements ButtonClickListener {
             return;
         }
 
-        // Initialize variables and lists
-        List<Integer> pattern = new ArrayList<>();
+        // Initialize
         Random random = new Random();
         round++;
 
@@ -191,14 +179,11 @@ public class Game implements ButtonClickListener {
             playToneAndChangeColor(buttonId, delay);
             delay += (DURATION + 90);
 
-            pattern.add(buttonId);
             allPatterns.add(buttonId);
         }
 
         // Update the round text view after determining the number of beeps
         updateRoundTextView();
-
-        Log.i(MYDEBUG, "Generated random pattern: " + pattern);
     }
 
     /**
@@ -213,11 +198,16 @@ public class Game implements ButtonClickListener {
 
         // Post a delayed action to change the button color and play the tone
         activity.getHandler().postDelayed(() -> {
+
+            int nightModeFlags = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            boolean isDarkModeEnabled = nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+            int defaultButtonColor = isDarkModeEnabled ? R.color.dark_default_button_color : R.color.light_default_button_color;
+
             changeButtonColor(buttonId, R.color.clicked_button_color);
             toneGenerator.startTone(toneType);
             activity.getHandler().postDelayed(() -> {
                 toneGenerator.stopTone();
-                changeButtonColor(buttonId, R.color.default_button_color);
+                changeButtonColor(buttonId, defaultButtonColor);
             }, DURATION * 2);
         }, delay);
     }

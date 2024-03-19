@@ -60,7 +60,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:foregroundTint="#000000" />
 
         <!-- Button 2 -->
         <Button

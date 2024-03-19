@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
@@ -28,7 +29,6 @@ import androidx.core.content.ContextCompat;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ScoreManager {
 
-    final static String MYDEBUG = "MYDEBUG";
     public static final int DURATION = 250; // Milliseconds
     protected final int NUMBER_OF_BOXES = 12;
     public static int round = 0;
@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startButton = findViewById(R.id.startButton);
         endGameButton = findViewById(R.id.endGameButton);
 
-        List<Button> buttons = new ArrayList<>();
-
         // Create and initialize game instance
         Game game = new Game(this);
         game.init(this);
@@ -101,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @SuppressLint("DiscouragedApi") int buttonId = getResources().getIdentifier("button" + i, "id", getPackageName());
             Button button = findViewById(buttonId);
             button.setOnClickListener(this);
-            buttons.add(button);
         }
 
         // Set click listeners for start and end game buttons
@@ -220,8 +217,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Change button colour when clicked.
         final Button clickedButton = findViewById(id);
         int clickedColour = ContextCompat.getColor(getApplicationContext(), R.color.clicked_button_color);
-        changeButtonColor(clickedButton, clickedColour, false);
-        handler.postDelayed(() -> changeButtonColor(clickedButton, Color.TRANSPARENT, true), DURATION);
+
+        // Determine default button color based on dark or light mode
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        boolean isDarkModeEnabled = nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+        int defaultButtonColor = isDarkModeEnabled ? ContextCompat.getColor(getApplicationContext(), R.color.dark_default_button_color) : ContextCompat.getColor(getApplicationContext(), R.color.light_default_button_color);
+
+        changeButtonColor(clickedButton, clickedColour, defaultButtonColor, false);
+        handler.postDelayed(() -> changeButtonColor(clickedButton, Color.TRANSPARENT, defaultButtonColor, true), DURATION);
 
         buttonFunctionalities(id);
 
@@ -291,19 +294,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param button The button to change the color of.
      * @param color The color to set for the button.
+     * @param defaultColor The default color for the button.
      * @param revert Flag indicating whether to revert the button's color to the default color.
      */
-    private void changeButtonColor(View button, int color, boolean revert) {
+    private void changeButtonColor(View button, int color, int defaultColor, boolean revert) {
 
         runOnUiThread(() -> {
 
             if (revert) {
-                int defaultColor = ContextCompat.getColor(getApplicationContext(), R.color.default_button_color);
                 button.getBackground().setColorFilter(defaultColor, PorterDuff.Mode.SRC_ATOP);
             }
             else {
                 button.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                handler.postDelayed(() -> changeButtonColor(button, Color.TRANSPARENT, true), DURATION);
+                handler.postDelayed(() -> changeButtonColor(button, Color.TRANSPARENT, defaultColor, true), DURATION);
             }
         });
     }
