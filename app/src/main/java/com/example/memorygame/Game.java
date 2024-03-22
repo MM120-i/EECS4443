@@ -39,7 +39,7 @@ public class Game implements ButtonClickListener {
     private final List<Integer> allPatterns = new ArrayList<>();
     public static double accuracyRate;
     private final HashMap<Integer, Long> roundStartTimeMap = new HashMap<>();
-    public static final int MAX_ROUNDS = 5;   // This can be changed ofc. But for now we r keeping the max laps to 5.
+    public static final int MAX_ROUNDS = 5;   // This can be changed ofc. But for now we r keeping the max rounds to 5.
 
     // Mapping of button IDs to tone types.
     private static final SparseIntArray buttonToToneMap = new SparseIntArray();
@@ -271,7 +271,7 @@ public class Game implements ButtonClickListener {
             errorRate = 0.0;
         }
 
-        // Calling ths score board method to settle the score.
+        // Calling the score board method to settle the score.
         scoreBoard();
     }
 

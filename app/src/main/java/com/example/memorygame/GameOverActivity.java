@@ -72,9 +72,6 @@ public class GameOverActivity extends AppCompatActivity implements ScoreManager{
         TextView completionPercentageTextView = findViewById(R.id.completionPercentageTextView);
         completionPercentageTextView.setText("Completion: " + completionPercentage + "%");
 
-
-        Bundle b = getIntent().getExtras();
-        assert b != null;
         TextView accuracyRateTextView = findViewById(R.id.accuracy);
         accuracyRateTextView.setText("Accuracy Rate: " + new DecimalFormat("##.##").format(accuracyRate) + "%");
 
