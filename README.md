@@ -1,8 +1,8 @@
-# EECS4443 Project (Not yet finished 💀)
+# EECS4443 Project: Memory Retention Game
 
 ***Technical Description:***
 
-The memory retention game is a mobile application that uses interesting game-like exercises to assist users improve their cognitive abilities. The application will be created in Android Studio using the Java programming language. This application is based on Human-Computer Interaction (HCI) concepts to deliver the best possible experience to the user. 
+The memory retention game is a full stack mobile application that uses interesting game-like exercises to assist users improve their cognitive abilities. The application will be created in Android Studio using the Java programming language. This application is based on Human-Computer Interaction (HCI) concepts to deliver the best possible experience to the user. 
 
 ***Topic Description:***
 
@@ -15,6 +15,7 @@ The app focuses on memory retention and improvement, mainly speed, accuracy, fle
 * Android SDK
 * Gradle
 * Git
+* SQLite
 
 ## Setup/Installation Requirements
 To run this project, you need to have Android Studio installed on your machine. If you haven't already installed Android Studio, you can download it from the official Android Studio website.
