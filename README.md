@@ -2,7 +2,7 @@
 
 ***Technical Description:***
 
-The memory retention game is a mobile application that uses interesting game-like exercises to assist users improve their cognitive abilities. The application will be created in Android Studio using the Java programming language. This application is based on Human-Computer Interaction (HCI) concepts to deliver the best possible experience to the user. 
+The memory retention game is a full stack mobile application that uses interesting game-like exercises to assist users improve their cognitive abilities. The application will be created in Android Studio using the Java programming language. This application is based on Human-Computer Interaction (HCI) concepts to deliver the best possible experience to the user. 
 
 ***Topic Description:***
 
