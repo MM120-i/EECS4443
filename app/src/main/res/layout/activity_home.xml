@@ -28,7 +28,20 @@
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
         android:paddingBottom="16dp"
-        android:text="@string/begin"
-        android:textColor="@android:color/white" />
+        android:text="@string/begin" />
+
+    <Button
+        android:id="@+id/rules_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/begin_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_background"
+        android:paddingStart="32dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="16dp"
+        android:text="@string/rules" />
 
 </RelativeLayout>

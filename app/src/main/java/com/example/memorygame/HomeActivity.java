@@ -1,5 +1,6 @@
 package com.example.memorygame;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // The rules activity
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button rulesButton = findViewById(R.id.rules_button);
+        rulesButton.setOnClickListener(v -> openRulesActivity());
+
         Button beginButton = findViewById(R.id.begin_button);
 
         if(beginButton != null){
@@ -39,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
                     if(hasWindowFocus){
                         Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
                 }
                 catch(Exception e){
@@ -75,5 +81,14 @@ public class HomeActivity extends AppCompatActivity {
                 beginButton.startAnimation(fadeInAnimation);
             }
         }
+    }
+
+    /**
+     * Opens the RulesActivity to display the rules of the game.
+     */
+    private void openRulesActivity() {
+        Intent intent = new Intent(this, RulesActivity.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

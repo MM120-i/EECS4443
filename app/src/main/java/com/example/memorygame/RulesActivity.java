@@ -50,6 +50,8 @@ public class RulesActivity extends AppCompatActivity implements TextToSpeech.OnI
         // Find the "Read Rules" button and set a click listener
         Button readRulesButton = findViewById(R.id.readRulesButton);
         readRulesButton.setOnClickListener(v -> toggleTextToSpeech(rulesText));
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**

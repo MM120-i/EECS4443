@@ -83,6 +83,8 @@ public class GameOverActivity extends AppCompatActivity implements ScoreManager{
         // Set up a click listener for the restartButton to restart the game
         Button restartButton = findViewById(R.id.restartButton);
         restartButton.setOnClickListener(v -> restartGame());
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**
@@ -132,6 +134,7 @@ public class GameOverActivity extends AppCompatActivity implements ScoreManager{
         intent.putExtra("error_rate", errorRate);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         // Finish the current activity to remove it from the stack
         finish();

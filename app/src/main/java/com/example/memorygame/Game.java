@@ -29,7 +29,7 @@ import androidx.core.content.ContextCompat;
  * the generation of game patterns, button clicks, tone generation, and interaction with the main
  * activity.
  */
-public class Game implements ButtonClickListener {
+public class Game implements ButtonClickListener{
 
     private final MainActivity activity;
     private final ToneGenerator toneGenerator;
@@ -91,6 +91,7 @@ public class Game implements ButtonClickListener {
 
         // Check if the Start button is enabled and if the maximum number of rounds has not been reached
         if (startButtonEnabled && round < MAX_ROUNDS) {
+
             startButtonEnabled = false;
             roundStartTimeMap.put(round, System.currentTimeMillis());
             playRandomPattern();

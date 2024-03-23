@@ -61,10 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // The rules activity
-        Button newButton = findViewById(R.id.rule);
-        newButton.setOnClickListener(v -> openRulesActivity());
-
         // Initialize vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -104,14 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Set click listeners for start and end game buttons
         startButton.setOnClickListener(this);
         endGameButton.setOnClickListener(this);
-    }
-
-    /**
-     * Opens the RulesActivity to display the rules of the game.
-     */
-    private void openRulesActivity() {
-        Intent intent = new Intent(this, RulesActivity.class);
-        startActivity(intent);
     }
 
     /**
@@ -254,6 +242,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 onEndGameButtonClick();
                 endGameButtonEnabled = false;
             }
+
+            // Smooth transition
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
         }     // Trigger the start button action if the clicked button is the start button and it is enabled
         else if (id == R.id.startButton) {
 
@@ -287,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent gameOverIntent = new Intent(MainActivity.this, GameOverActivity.class);
         gameOverIntent.putExtra("round", round);
         startActivity(gameOverIntent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**
