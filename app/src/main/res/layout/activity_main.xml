@@ -37,9 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="5dp"
             android:text="@string/rules"
-            android:textSize="13sp"/>
+            android:textSize="13sp"
+            android:background="@drawable/button_background"/>
 
     </LinearLayout>
 
@@ -177,8 +178,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="0dp"
-            android:text="@string/start" />
+            android:layout_marginStart="2dp"
+            android:text="@string/start"
+            android:background="@drawable/button_background"/>
 
         <Button
             android:id="@+id/endGameButton"
@@ -186,8 +188,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="122dp"
-            android:text="@string/end_game" />
+            android:layout_marginStart="119dp"
+            android:text="@string/end_game"
+            android:background="@drawable/button_background"/>
 
     </LinearLayout>
 
