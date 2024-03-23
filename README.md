@@ -1,4 +1,4 @@
-# EECS4443 Project (Not yet finished 💀)
+# EECS4443 Project
 
 ***Technical Description:***
 
@@ -15,6 +15,7 @@ The app focuses on memory retention and improvement, mainly speed, accuracy, fle
 * Android SDK
 * Gradle
 * Git
+* SQLite
 
 ## Setup/Installation Requirements
 To run this project, you need to have Android Studio installed on your machine. If you haven't already installed Android Studio, you can download it from the official Android Studio website.
