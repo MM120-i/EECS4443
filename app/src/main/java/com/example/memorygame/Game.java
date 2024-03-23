@@ -3,8 +3,10 @@ package com.example.memorygame;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.widget.Button;
 import android.widget.TextView;
@@ -98,7 +100,7 @@ public class Game implements ButtonClickListener {
         else if (round >= MAX_ROUNDS) {
 
             // Calculate and pass the average time per round to the GameOverActivity
-            int lapsCompleted = 0; // Variable to track completed laps
+            int roundsCompleted = 0; // Variable to track completed rounds
 
             for (int i = 1; i <= round; i++) {
 
@@ -108,13 +110,13 @@ public class Game implements ButtonClickListener {
 
                     if (startTime != null) {
                         totalTime += System.currentTimeMillis() - startTime;
-                        lapsCompleted++;
+                        roundsCompleted++;
                     }
                 }
             }
 
             // Calculate average time per round only if laps were completed
-            long averageTimePerRound = (lapsCompleted > 0) ? totalTime / lapsCompleted : 0;
+            long averageTimePerRound = (roundsCompleted > 0) ? totalTime / roundsCompleted : 0;
 
             // Launch GameOverActivity with the average time per round and accuracy rate
             Intent intent = new Intent(activity, GameOverActivity.class);
@@ -126,8 +128,18 @@ public class Game implements ButtonClickListener {
             activity.startActivity(intent);
 
             MainActivity.passUserInputsToGame();
-
             accuracy();
+
+            // Insert game results into the database using try-with-resources
+            try (DatabaseHelper dbHelper = new DatabaseHelper(activity.getApplicationContext())) {
+                dbHelper.addGameResult(accuracyRate, errorRate, round, averageTimePerRound / 1000);
+                SQLiteDatabase database = dbHelper.getReadableDatabase();
+                DatabaseLogger.logDatabaseContents(database, GameResultsContract.GameEntry.TABLE_NAME);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                Log.i("MYDEBUG", "Error inserting into the database.");
+            }
         }
     }
 

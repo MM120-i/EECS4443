@@ -350,5 +350,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStop(){
         super.onStop();
         saveHighScore(highScore);
+
+       // Uncomment this to clear out the database and start from scratch.
+       // dbClear();
+    }
+
+    /**
+     * Clears the contents of the database by deleting all entries in the game results table.
+     */
+    private void dbClear(){
+
+        try (DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext())) {
+            dbHelper.clearDatabase();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

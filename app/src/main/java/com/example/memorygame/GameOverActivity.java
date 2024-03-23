@@ -26,6 +26,8 @@ import java.text.DecimalFormat;
  */
 public class GameOverActivity extends AppCompatActivity implements ScoreManager{
 
+    public static int completionPercentage = 0;
+
     /**
      * This method is called when the activity is first created. It initializes the layout and retrieves
      * the high score and round information from the intent extras. Then, it sets the text of the
@@ -68,7 +70,7 @@ public class GameOverActivity extends AppCompatActivity implements ScoreManager{
         }
 
         // Calculate completion percentage based on the number of rounds completed
-        int completionPercentage = (round * 100) / MAX_ROUNDS;
+        completionPercentage = (round * 100) / MAX_ROUNDS;
         TextView completionPercentageTextView = findViewById(R.id.completionPercentageTextView);
         completionPercentageTextView.setText("Completion: " + completionPercentage + "%");
 

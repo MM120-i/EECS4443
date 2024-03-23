@@ -4,8 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="clicked_button_color">#FF00FF00</color>
     <color name="light_grey">#D3D3D3</color>
-    <!-- Light colour-->
+
+    <!-- Button colour on light mode-->
     <color name="light_default_button_color">#FF6750A3</color>
-    <!-- Dark colour-->
-    <color name="dark_default_button_color">#CFC2F3</color>
+    <!-- Button colour on dark mode-->
+    <color name="dark_default_button_color">#FFCFBBFE</color>
 </resources>
