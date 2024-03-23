@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 
 /**
  * Utility class for logging the contents of a database table.
+ * I am logging the database contents to keep things simple. The researchers can retrieve the data from the log directly after the experiment.
  */
 public class DatabaseLogger {
 

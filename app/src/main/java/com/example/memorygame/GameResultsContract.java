@@ -14,6 +14,7 @@ public class GameResultsContract {
      * Inner class that defines the table contents.
      */
     public static class GameEntry implements BaseColumns {
+
         public static final String TABLE_NAME = "game_results";
         public static final String COLUMN_ACCURACY_RATE = "accuracy_rate";
         public static final String COLUMN_ERROR_RATE = "error_rate";

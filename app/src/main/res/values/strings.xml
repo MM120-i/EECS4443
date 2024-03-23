@@ -36,5 +36,7 @@
         <big>Get ready to challenge your memory and aim for the high score!</big>
         ]]>
     </string>
+    <string name="memory_game">Memory Game</string>
+    <string name="begin">Begin</string>
 
 </resources>
