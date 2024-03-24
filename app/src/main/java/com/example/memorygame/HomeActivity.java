@@ -1,12 +1,12 @@
 package com.example.memorygame;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,31 +30,44 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // The rules activity
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button rulesButton = findViewById(R.id.rules_button);
+        Button rulesButton = findViewById(R.id.rules_button);
         rulesButton.setOnClickListener(v -> openRulesActivity());
 
+        // Settings button
+        ImageButton settingsButton = findViewById(R.id.settings_button);
+        settingsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
+
+        // Start fade-in animation on settings button
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        settingsButton.startAnimation(fadeInAnimation);
+
+        // Begin button
         Button beginButton = findViewById(R.id.begin_button);
 
-        if(beginButton != null){
+        if (beginButton != null) {
 
-            // Set up a click listener for the begin button
+            // Start fade-in animation on begin button
+            beginButton.startAnimation(fadeInAnimation);
             beginButton.setOnClickListener(view -> {
-                try{
-                    // Check if the window has focus before starting the game
-                    if(hasWindowFocus){
+
+                try {
+                    if (hasWindowFocus) {
                         Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
                 }
-                catch(Exception e){
+                catch (Exception e) {
                     e.printStackTrace();
                     Log.i(ERROR, "Error occurred while navigating to MainActivity");
                 }
             });
         }
-        else{
-            Log.i(ERROR, "Begin button not found in layout");
+        else {
+            Log.i(ERROR, "Begin button not found in layout.");
         }
     }
 
@@ -68,19 +81,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus){
 
         super.onWindowFocusChanged(hasFocus);
-
-        if(hasFocus){
-
-            // Set hasWindowFocus to true when the window gains focus
-            hasWindowFocus = true;
-            Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-            Button beginButton = findViewById(R.id.begin_button);
-
-            if(beginButton != null){
-                // Start the fade-in animation on the begin button
-                beginButton.startAnimation(fadeInAnimation);
-            }
-        }
+        hasWindowFocus = hasFocus;
     }
 
     /**

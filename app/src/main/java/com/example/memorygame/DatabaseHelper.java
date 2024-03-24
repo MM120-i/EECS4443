@@ -82,6 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Clears all data from the database.
      */
     void clearDatabase(){
+
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(GameResultsContract.GameEntry.TABLE_NAME, null, null);
         db.close();

@@ -38,5 +38,7 @@
     </string>
     <string name="memory_game">Memory Game</string>
     <string name="begin">Begin</string>
+    <string name="clear_database">Clear Data</string>
+    <string name="settings">Settings</string>
 
 </resources>
