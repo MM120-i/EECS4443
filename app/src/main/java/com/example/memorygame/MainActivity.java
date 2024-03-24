@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import java.util.*;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -100,6 +101,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Set click listeners for start and end game buttons
         startButton.setOnClickListener(this);
         endGameButton.setOnClickListener(this);
+
+        // Set up the back button handler
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     /**
@@ -161,6 +172,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
+        boolean isVibrationEnabled = getSharedPreferences(SettingsActivity.PREFS_NAME, MODE_PRIVATE).getBoolean(SettingsActivity.KEY_VIBRATION_ENABLED, true);
+
         if (isButtonPressInProgress) {
             return;
         }
@@ -168,11 +181,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Vibrate when a button is clicked.
         if(vibrator != null && vibrator.hasVibrator()) {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-            }
-            else{
-                vibrator.vibrate(50);
+            if(isVibrationEnabled){
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                }
+                else{
+                    vibrator.vibrate(50);
+                }
             }
         }
 

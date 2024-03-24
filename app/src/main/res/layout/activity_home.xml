@@ -55,7 +55,7 @@
         android:layout_marginStart="16dp"
         android:src="@drawable/baseline_settings_24"
         android:background="@drawable/button_background"
-        android:contentDescription="TODO" />
-
+        android:contentDescription="Image button"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>

@@ -40,5 +40,7 @@
     <string name="begin">Begin</string>
     <string name="clear_database">Clear Data</string>
     <string name="settings">Settings</string>
+    <string name="number_of_rounds">Number of rounds:</string>
+    <string name="vibrate_on_button_click">Vibrate on button click:  </string>
 
 </resources>

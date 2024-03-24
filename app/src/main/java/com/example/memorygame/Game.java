@@ -41,7 +41,7 @@ public class Game implements ButtonClickListener{
     private final List<Integer> allPatterns = new ArrayList<>();
     public static double accuracyRate;
     private final HashMap<Integer, Long> roundStartTimeMap = new HashMap<>();
-    public static final int MAX_ROUNDS = 5;   // This can be changed ofc. But for now we r keeping the max rounds to 5.
+    public static int MAX_ROUNDS;
 
     // Mapping of button IDs to tone types.
     private static final SparseIntArray buttonToToneMap = new SparseIntArray();
@@ -139,7 +139,7 @@ public class Game implements ButtonClickListener{
             }
             catch (Exception e) {
                 e.printStackTrace();
-                Log.i("MYDEBUG", "Error inserting into the database.");
+                Log.i("ERROR", "Error inserting into the database.");
             }
         }
     }

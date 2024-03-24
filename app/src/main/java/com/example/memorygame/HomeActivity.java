@@ -29,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
         // The rules activity
         Button rulesButton = findViewById(R.id.rules_button);
         rulesButton.setOnClickListener(v -> openRulesActivity());
@@ -41,8 +43,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // Start fade-in animation on settings button
-        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         settingsButton.startAnimation(fadeInAnimation);
+        rulesButton.startAnimation(fadeInAnimation);
 
         // Begin button
         Button beginButton = findViewById(R.id.begin_button);

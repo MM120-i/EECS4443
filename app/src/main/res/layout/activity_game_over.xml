@@ -95,7 +95,6 @@
         android:layout_marginTop="72dp"
         android:background="@drawable/button_background"
         android:text="@string/restart"
-        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
