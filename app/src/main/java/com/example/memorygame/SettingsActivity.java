@@ -61,9 +61,6 @@ public class SettingsActivity extends AppCompatActivity {
         roundsTextView.startAnimation(fadeInAnimation);
 
         // Set up the spinner for number of rounds
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.rounds_array, android.R.layout.simple_spinner_item);
-//        roundsSpinner.setAdapter(adapter);
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.rounds_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         roundsSpinner.setAdapter(adapter);
@@ -116,7 +113,6 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int savedRounds = prefs.getInt(KEY_MAX_ROUNDS, 3);
 
-        // Set the initial selection based on the saved value
         roundsSpinner.setSelection(savedRounds - 3);
 
         roundsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
