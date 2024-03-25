@@ -27,7 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
     private static final String KEY_MAX_ROUNDS = "maxRounds";
     public static final String KEY_VIBRATION_ENABLED = "vibration_enabled";
 
-
     /**
      * Called when the activity is starting.
      * This is where most initialization should go.
@@ -64,20 +63,17 @@ public class SettingsActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.rounds_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         roundsSpinner.setAdapter(adapter);
-
         roundsSpinner.setSelection(0);
         setupRoundsSpinner(roundsSpinner);
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean isVibrationEnabled = prefs.getBoolean(KEY_VIBRATION_ENABLED, true);
-        vibrationSwitch.setChecked(isVibrationEnabled);
 
+        vibrationSwitch.setChecked(isVibrationEnabled);
         vibrationSwitch = findViewById(R.id.vibration_switch);
         vibrationSwitch.setChecked(isVibrationEnabled());
         vibrationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> saveVibrationPreference(isChecked));
-
-        // apply the animations on the switch
-        vibrationSwitch.startAnimation(fadeInAnimation);
+        vibrationSwitch.startAnimation(fadeInAnimation); // Animation for the switch
     }
 
     /**
@@ -96,6 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
      * @param isEnabled The boolean value indicating whether vibration is enabled.
      */
     private void saveVibrationPreference(boolean isEnabled) {
+
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(KEY_VIBRATION_ENABLED, isEnabled);
@@ -116,12 +113,12 @@ public class SettingsActivity extends AppCompatActivity {
         roundsSpinner.setSelection(savedRounds - 3);
 
         roundsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 int selectedRounds = position + 3;
                 Game.MAX_ROUNDS = selectedRounds;
-
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putInt(KEY_MAX_ROUNDS, selectedRounds);
                 editor.apply();
@@ -161,6 +158,7 @@ public class SettingsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // Display a toast to indicate that the data was cleared successfully
         Toast.makeText(this, "Data cleared successfully", Toast.LENGTH_SHORT).show();
     }
 }

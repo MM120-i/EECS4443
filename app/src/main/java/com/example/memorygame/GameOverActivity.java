@@ -17,7 +17,6 @@ import static com.example.memorygame.MainActivity.highScore;
 import static com.example.memorygame.Game.MAX_ROUNDS;
 import static com.example.memorygame.Game.totalTime;
 
-
 import java.text.DecimalFormat;
 
 
@@ -94,6 +93,7 @@ public class GameOverActivity extends AppCompatActivity implements ScoreManager{
      */
     @Override
     public void saveHighScore(int score) {
+
         SharedPreferences prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(HIGH_SCORE_KEY, score);

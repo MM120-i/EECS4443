@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     public void saveHighScore(int score) {
+
         SharedPreferences prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(HIGH_SCORE_KEY, score);
@@ -172,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
+        // Variable to check if the vibration switch is on or off
         boolean isVibrationEnabled = getSharedPreferences(SettingsActivity.PREFS_NAME, MODE_PRIVATE).getBoolean(SettingsActivity.KEY_VIBRATION_ENABLED, true);
 
         if (isButtonPressInProgress) {
@@ -292,6 +294,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Starts the GameOverActivity and passes the current round as an extra.
      */
     public void onEndGameButtonClick(){
+
         Intent gameOverIntent = new Intent(MainActivity.this, GameOverActivity.class);
         gameOverIntent.putExtra("round", round);
         startActivity(gameOverIntent);
