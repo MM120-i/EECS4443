@@ -1,4 +1,4 @@
-# EECS4443 Project: Memory Retention Game
+# Memory Retention Game
 
 ***Technical Description:***
 
