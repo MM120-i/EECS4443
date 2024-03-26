@@ -41,7 +41,7 @@ public class Game implements ButtonClickListener{
     private final List<Integer> allPatterns = new ArrayList<>();
     public static double accuracyRate;
     private final HashMap<Integer, Long> roundStartTimeMap = new HashMap<>();
-    public static int MAX_ROUNDS = 3;   // Default number of round.
+    public static int MAX_ROUNDS = 5;   // Default number of rounds.
 
     // Mapping of button IDs to tone types.
     private static final SparseIntArray buttonToToneMap = new SparseIntArray();
