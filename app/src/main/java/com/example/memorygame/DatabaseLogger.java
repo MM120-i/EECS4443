@@ -28,9 +28,8 @@ public class DatabaseLogger {
             return;
         }
 
-        // Query the database table to retrieve accuracy_rate, error_rate, and rounds
+        // Query the database table to retrieve accuracy_rate, error_rate, rounds, average_time_per_round, and completion_percentage
         Cursor cursor = database.rawQuery("SELECT accuracy_rate, error_rate, rounds, average_time_per_round, completion_percentage FROM " + tableName, null);
-
 
         // Check if the cursor is valid
         if (cursor == null) {
@@ -47,9 +46,7 @@ public class DatabaseLogger {
             double accuracyRate = cursor.getDouble(cursor.getColumnIndexOrThrow("accuracy_rate"));
             double errorRate = cursor.getDouble(cursor.getColumnIndexOrThrow("error_rate"));
             int rounds = cursor.getInt(cursor.getColumnIndexOrThrow("rounds"));
-
-            // Retrieve the average time per round from the cursor
-            long averageTimePerRound = cursor.getLong(cursor.getColumnIndexOrThrow("average_time_per_round"));
+            long averageTimePerRound = cursor.getLong(cursor.getColumnIndexOrThrow("average_time_per_round"));             // Retrieve the average time per round from the cursor
 
             // Round the accuracy rate and error rate values
             DecimalFormat decimalFormat = new DecimalFormat("##.##");
