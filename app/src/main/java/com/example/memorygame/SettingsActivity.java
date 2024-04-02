@@ -92,7 +92,6 @@ public class SettingsActivity extends AppCompatActivity {
      * @param isEnabled The boolean value indicating whether vibration is enabled.
      */
     private void saveVibrationPreference(boolean isEnabled) {
-
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(KEY_VIBRATION_ENABLED, isEnabled);
@@ -136,7 +135,6 @@ public class SettingsActivity extends AppCompatActivity {
      * This dialog asks the user to confirm if they want to clear the database.
      */
     private void showConfirmationDialog(){
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm");
         builder.setMessage("Are you sure you want to clear the data?");

@@ -38,7 +38,7 @@ public class DatabaseLogger {
         }
 
         // Log the column names
-        Log.d(TAG, "Columns: accuracy_rate, error_rate, rounds");
+        Log.d(TAG, "Columns: Accuracy Rate\tError Rate\tRounds\tAverage Time per Round (s)\tCompletion Percentage");
 
         // Log the row data
         while (cursor.moveToNext()) {
@@ -54,11 +54,8 @@ public class DatabaseLogger {
             String roundedErrorRate = decimalFormat.format(errorRate);
 
             // Log the accuracy rate, error rate, rounds, average time, and completion percentage
-            Log.d(TAG, "Accuracy Rate: " + roundedAccuracyRate + "%" +
-                    ", Error Rate: " + roundedErrorRate + "%" +
-                    ", Rounds: " + rounds +
-                    ", Average Time per Round: " + averageTimePerRound + " s" +
-                    ", Completion Percentage: " + 100 + "%");
+            Log.d(TAG, String.format("Accuracy Rate: %s%%\tError Rate: %s%%\tRounds: %d\tAverage Time per Round: %d\tCompletion Percentage: 100%%",
+                    roundedAccuracyRate, roundedErrorRate, rounds, averageTimePerRound));
         }
 
         // Close the cursor

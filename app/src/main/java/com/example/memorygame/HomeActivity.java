@@ -81,7 +81,6 @@ public class HomeActivity extends AppCompatActivity {
      */
     @Override
     public void onWindowFocusChanged(boolean hasFocus){
-
         super.onWindowFocusChanged(hasFocus);
         hasWindowFocus = hasFocus;
     }
@@ -90,7 +89,6 @@ public class HomeActivity extends AppCompatActivity {
      * Opens the RulesActivity to display the rules of the game.
      */
     private void openRulesActivity() {
-
         Intent intent = new Intent(this, RulesActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

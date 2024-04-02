@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     public void saveHighScore(int score) {
-
         SharedPreferences prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(HIGH_SCORE_KEY, score);
@@ -294,7 +293,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Starts the GameOverActivity and passes the current round as an extra.
      */
     public void onEndGameButtonClick(){
-
         Intent gameOverIntent = new Intent(MainActivity.this, GameOverActivity.class);
         gameOverIntent.putExtra("round", round);
         startActivity(gameOverIntent);
@@ -360,7 +358,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     protected void onStop(){
-
         super.onStop();
         saveHighScore(highScore);
     }
