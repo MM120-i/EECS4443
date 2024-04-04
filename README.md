@@ -40,3 +40,9 @@ Note: The game APK file is avaliable for download. It can be located in the "deb
 
 ![image](https://github.com/MM120-i/EECS4443/assets/80307451/b56dd3a2-a96e-4e4e-ac11-83bb93d708d3)
 
+
+<div align="left">
+   Memory Game Demo <a href="https://www.youtube.com/watch?v=XjdJMXmrb8c&ab_channel=MahimMarufuzzaman" target="_blank"><b>Youtube Link</b></a>.
+</div>
+
+[![Memory Game Demo](https://img.youtube.com/vi/XjdJMXmrb8c/0.jpg)](https://www.youtube.com/watch?v=XjdJMXmrb8c)
