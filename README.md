@@ -36,13 +36,12 @@ To run this project, you need to have Android Studio installed on your machine. 
 * In Android Studio, click on the "Run" button or press Shift + F10 to build and run the project.
 * Select the connected device or AVD to install and run the application.
 
-Note: The game APK file is avaliable for download. It can be located in the "debug" folder in the root directory.
-
-![image](https://github.com/MM120-i/EECS4443/assets/80307451/b56dd3a2-a96e-4e4e-ac11-83bb93d708d3)
+Note: The game APK file is available for download. It can be located in the `debug` folder in the root directory.
 
 
+## App Demo
 <div align="left">
-   Memory Game Demo <a href="https://www.youtube.com/watch?v=XjdJMXmrb8c&ab_channel=MahimMarufuzzaman" target="_blank"><b>Youtube Link</b></a>.
+   Memory Game tutorial <a href="https://www.youtube.com/watch?v=XjdJMXmrb8c&ab_channel=MahimMarufuzzaman" target="_blank"><b>Youtube Link</b></a>.
 </div>
 
 [![Memory Game Demo](https://img.youtube.com/vi/XjdJMXmrb8c/0.jpg)](https://www.youtube.com/watch?v=XjdJMXmrb8c)
