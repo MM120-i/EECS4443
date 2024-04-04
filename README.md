@@ -36,7 +36,7 @@ To run this project, you need to have Android Studio installed on your machine. 
 * In Android Studio, click on the "Run" button or press Shift + F10 to build and run the project.
 * Select the connected device or AVD to install and run the application.
 
-Note: The game APK file is avaliable for download. It can be located in the "debug" folder in the root direct
+Note: The game APK file is avaliable for download. It can be located in the "debug" folder in the root directory.
 
 ![image](https://github.com/MM120-i/EECS4443/assets/80307451/b56dd3a2-a96e-4e4e-ac11-83bb93d708d3)
 
