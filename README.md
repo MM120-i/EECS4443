@@ -10,6 +10,7 @@ The app focuses on memory retention and improvement, mainly speed, accuracy, fle
 ## Tech Stack
 
 * Java
+* Kotlin
 * Android Studio
 * XML
 * Android SDK
@@ -38,7 +39,8 @@ To run this project, you need to have Android Studio installed on your machine. 
 
 Note: The game APK file is available for download. It can be located in the `debug` folder in the root directory.
 
-#### Build Gradle File:
+### Configuration Overview: Build Gradle File
+
 <details>
 <summary><code>build.gradle.kts(:app)</code></summary>
 
