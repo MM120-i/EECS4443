@@ -33,7 +33,7 @@ To run this project, you need to have Android Studio installed on your machine. 
 * Android Studio will import the project and build the necessary dependencies.
 
 #### Run the Project
-* Connect an Android device to your computer or use an Android Virtual Device (AVD) in Android Studio (A physical device is better imo).
+* Connect an Android device to your computer or use an Android Virtual Device (AVD) in Android Studio (A physical device is better because of the tactile feedback).
 * In Android Studio, click on the "Run" button or press Shift + F10 to build and run the project.
 * Select the connected device or AVD to install and run the application.
 
